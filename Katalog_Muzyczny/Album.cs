@@ -16,6 +16,7 @@ namespace Katalog_Muzyczny
         private string format;
         private int year;
         private string country;
+        private float cost;
         public string Name
         {
             get
@@ -93,13 +94,24 @@ namespace Katalog_Muzyczny
                 country = value;
             }
         }
+        public float Cost
+        {
+            get
+            {
+                return cost;
+            }
+            set
+            {
+                cost = value;
+            }
+        }
         
         public Album()
         {
         }
         public string[] GetAlbum()
         {
-            string[] s = new string[] { name, artist, style, label, format, year.ToString(), country };
+            string[] s = new string[] { name, artist, style, label, format, year.ToString(), country, cost.ToString() };
             return s;
         }
         public string[] GetShortAlbum()

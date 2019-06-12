@@ -29,12 +29,14 @@
         private void InitializeComponent()
         {
             this.msMenu = new System.Windows.Forms.MenuStrip();
-            this.msiEdit = new System.Windows.Forms.ToolStripMenuItem();
-            this.msiAddAlbum = new System.Windows.Forms.ToolStripMenuItem();
-            this.msiEditAlbum = new System.Windows.Forms.ToolStripMenuItem();
+            this.msiAdd = new System.Windows.Forms.ToolStripMenuItem();
             this.msiView = new System.Windows.Forms.ToolStripMenuItem();
+            this.msiCosts = new System.Windows.Forms.ToolStripMenuItem();
             this.gbAddAlbum = new System.Windows.Forms.GroupBox();
-            this.btnRead = new System.Windows.Forms.Button();
+            this.label16 = new System.Windows.Forms.Label();
+            this.tbCost = new System.Windows.Forms.TextBox();
+            this.tbFormat = new System.Windows.Forms.ComboBox();
+            this.tbStyle = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -45,14 +47,16 @@
             this.btnAddAlbum = new System.Windows.Forms.Button();
             this.tbCountry = new System.Windows.Forms.TextBox();
             this.tbYear = new System.Windows.Forms.TextBox();
-            this.tbFormat = new System.Windows.Forms.TextBox();
             this.tbLabel = new System.Windows.Forms.TextBox();
-            this.tbStyle = new System.Windows.Forms.TextBox();
             this.tbAlbumArtist = new System.Windows.Forms.TextBox();
             this.tbAlbumName = new System.Windows.Forms.TextBox();
             this.gbShortAlbumList = new System.Windows.Forms.GroupBox();
             this.dgvShortAlbumList = new System.Windows.Forms.DataGridView();
             this.gbEditAlbum = new System.Windows.Forms.GroupBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.tbEditCost = new System.Windows.Forms.TextBox();
+            this.tbEditFormat = new System.Windows.Forms.ComboBox();
+            this.tbEditStyle = new System.Windows.Forms.ComboBox();
             this.btnDeleteAlbum = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -64,19 +68,24 @@
             this.btnEditAlbum = new System.Windows.Forms.Button();
             this.tbEditCountry = new System.Windows.Forms.TextBox();
             this.tbEditYear = new System.Windows.Forms.TextBox();
-            this.tbEditFormat = new System.Windows.Forms.TextBox();
             this.tbEditLabel = new System.Windows.Forms.TextBox();
-            this.tbEditStyle = new System.Windows.Forms.TextBox();
             this.tbEditArtist = new System.Windows.Forms.TextBox();
             this.tbEditName = new System.Windows.Forms.TextBox();
             this.gbAlbumList = new System.Windows.Forms.GroupBox();
             this.dgvAlbumList = new System.Windows.Forms.DataGridView();
             this.gbFiltres = new System.Windows.Forms.GroupBox();
+            this.btnShowAll = new System.Windows.Forms.Button();
             this.cbSearch = new System.Windows.Forms.ComboBox();
             this.btnSearch = new System.Windows.Forms.Button();
             this.label15 = new System.Windows.Forms.Label();
             this.tbSearch = new System.Windows.Forms.TextBox();
-            this.btnShowAll = new System.Windows.Forms.Button();
+            this.gbCosts = new System.Windows.Forms.GroupBox();
+            this.lblCostResult = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.btnCountMiddleCost = new System.Windows.Forms.Button();
+            this.cbCostSearch = new System.Windows.Forms.ComboBox();
+            this.tbCostSearch = new System.Windows.Forms.TextBox();
+            this.btnShowAllCost = new System.Windows.Forms.Button();
             this.msMenu.SuspendLayout();
             this.gbAddAlbum.SuspendLayout();
             this.gbShortAlbumList.SuspendLayout();
@@ -85,41 +94,27 @@
             this.gbAlbumList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAlbumList)).BeginInit();
             this.gbFiltres.SuspendLayout();
+            this.gbCosts.SuspendLayout();
             this.SuspendLayout();
             // 
             // msMenu
             // 
             this.msMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.msiEdit,
-            this.msiView});
+            this.msiAdd,
+            this.msiView,
+            this.msiCosts});
             this.msMenu.Location = new System.Drawing.Point(0, 0);
             this.msMenu.Name = "msMenu";
-            this.msMenu.Size = new System.Drawing.Size(800, 24);
+            this.msMenu.Size = new System.Drawing.Size(951, 24);
             this.msMenu.TabIndex = 0;
             this.msMenu.Text = "Menu";
             // 
-            // msiEdit
+            // msiAdd
             // 
-            this.msiEdit.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.msiAddAlbum,
-            this.msiEditAlbum});
-            this.msiEdit.Name = "msiEdit";
-            this.msiEdit.Size = new System.Drawing.Size(52, 20);
-            this.msiEdit.Text = "Edytuj";
-            // 
-            // msiAddAlbum
-            // 
-            this.msiAddAlbum.Name = "msiAddAlbum";
-            this.msiAddAlbum.Size = new System.Drawing.Size(180, 22);
-            this.msiAddAlbum.Text = "Dodaj album";
-            this.msiAddAlbum.Click += new System.EventHandler(this.msiAddAlbum_Click);
-            // 
-            // msiEditAlbum
-            // 
-            this.msiEditAlbum.Name = "msiEditAlbum";
-            this.msiEditAlbum.Size = new System.Drawing.Size(180, 22);
-            this.msiEditAlbum.Text = "Edytuj album";
-            this.msiEditAlbum.Click += new System.EventHandler(this.msiEditAlbum_Click);
+            this.msiAdd.Name = "msiAdd";
+            this.msiAdd.Size = new System.Drawing.Size(87, 20);
+            this.msiAdd.Text = "Dodaj album";
+            this.msiAdd.Click += new System.EventHandler(this.msiAdd_Click);
             // 
             // msiView
             // 
@@ -128,9 +123,19 @@
             this.msiView.Text = "Podgląd";
             this.msiView.Click += new System.EventHandler(this.msiView_Click);
             // 
+            // msiCosts
+            // 
+            this.msiCosts.Name = "msiCosts";
+            this.msiCosts.Size = new System.Drawing.Size(46, 20);
+            this.msiCosts.Text = "Ceny";
+            this.msiCosts.Click += new System.EventHandler(this.msiCosts_Click);
+            // 
             // gbAddAlbum
             // 
-            this.gbAddAlbum.Controls.Add(this.btnRead);
+            this.gbAddAlbum.Controls.Add(this.label16);
+            this.gbAddAlbum.Controls.Add(this.tbCost);
+            this.gbAddAlbum.Controls.Add(this.tbFormat);
+            this.gbAddAlbum.Controls.Add(this.tbStyle);
             this.gbAddAlbum.Controls.Add(this.label7);
             this.gbAddAlbum.Controls.Add(this.label6);
             this.gbAddAlbum.Controls.Add(this.label5);
@@ -141,27 +146,67 @@
             this.gbAddAlbum.Controls.Add(this.btnAddAlbum);
             this.gbAddAlbum.Controls.Add(this.tbCountry);
             this.gbAddAlbum.Controls.Add(this.tbYear);
-            this.gbAddAlbum.Controls.Add(this.tbFormat);
             this.gbAddAlbum.Controls.Add(this.tbLabel);
-            this.gbAddAlbum.Controls.Add(this.tbStyle);
             this.gbAddAlbum.Controls.Add(this.tbAlbumArtist);
             this.gbAddAlbum.Controls.Add(this.tbAlbumName);
             this.gbAddAlbum.Location = new System.Drawing.Point(13, 28);
             this.gbAddAlbum.Name = "gbAddAlbum";
-            this.gbAddAlbum.Size = new System.Drawing.Size(342, 389);
+            this.gbAddAlbum.Size = new System.Drawing.Size(494, 389);
             this.gbAddAlbum.TabIndex = 1;
             this.gbAddAlbum.TabStop = false;
             this.gbAddAlbum.Text = "Dodaj Album";
             // 
-            // btnRead
+            // label16
             // 
-            this.btnRead.Location = new System.Drawing.Point(143, 362);
-            this.btnRead.Name = "btnRead";
-            this.btnRead.Size = new System.Drawing.Size(180, 23);
-            this.btnRead.TabIndex = 15;
-            this.btnRead.Text = "Czytaj Test";
-            this.btnRead.UseVisualStyleBackColor = true;
-            this.btnRead.Click += new System.EventHandler(this.btnRead_Click);
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(19, 284);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(32, 13);
+            this.label16.TabIndex = 18;
+            this.label16.Text = "Cena";
+            // 
+            // tbCost
+            // 
+            this.tbCost.Location = new System.Drawing.Point(143, 281);
+            this.tbCost.Name = "tbCost";
+            this.tbCost.Size = new System.Drawing.Size(179, 20);
+            this.tbCost.TabIndex = 7;
+            // 
+            // tbFormat
+            // 
+            this.tbFormat.FormattingEnabled = true;
+            this.tbFormat.Items.AddRange(new object[] {
+            "Winyl",
+            "Kaseta",
+            "CD",
+            "DVD",
+            "VHS",
+            "Cyfrowy"});
+            this.tbFormat.Location = new System.Drawing.Point(143, 200);
+            this.tbFormat.Name = "tbFormat";
+            this.tbFormat.Size = new System.Drawing.Size(180, 21);
+            this.tbFormat.TabIndex = 4;
+            // 
+            // tbStyle
+            // 
+            this.tbStyle.FormattingEnabled = true;
+            this.tbStyle.Items.AddRange(new object[] {
+            "Rock",
+            "Electronic",
+            "Pop",
+            "Folk, World & Country",
+            "Jazz",
+            "Funk / Soul",
+            "Classical",
+            "Hip Hop",
+            "Latin",
+            "Reggae",
+            "Stage & Screen",
+            "Blues"});
+            this.tbStyle.Location = new System.Drawing.Point(142, 145);
+            this.tbStyle.Name = "tbStyle";
+            this.tbStyle.Size = new System.Drawing.Size(180, 21);
+            this.tbStyle.TabIndex = 2;
             // 
             // label7
             // 
@@ -231,7 +276,7 @@
             this.btnAddAlbum.Location = new System.Drawing.Point(143, 332);
             this.btnAddAlbum.Name = "btnAddAlbum";
             this.btnAddAlbum.Size = new System.Drawing.Size(180, 23);
-            this.btnAddAlbum.TabIndex = 7;
+            this.btnAddAlbum.TabIndex = 8;
             this.btnAddAlbum.Text = "Dodaj";
             this.btnAddAlbum.UseVisualStyleBackColor = true;
             this.btnAddAlbum.Click += new System.EventHandler(this.btnAddAlbum_Click);
@@ -250,26 +295,12 @@
             this.tbYear.Size = new System.Drawing.Size(180, 20);
             this.tbYear.TabIndex = 5;
             // 
-            // tbFormat
-            // 
-            this.tbFormat.Location = new System.Drawing.Point(143, 200);
-            this.tbFormat.Name = "tbFormat";
-            this.tbFormat.Size = new System.Drawing.Size(180, 20);
-            this.tbFormat.TabIndex = 4;
-            // 
             // tbLabel
             // 
             this.tbLabel.Location = new System.Drawing.Point(143, 173);
             this.tbLabel.Name = "tbLabel";
             this.tbLabel.Size = new System.Drawing.Size(180, 20);
             this.tbLabel.TabIndex = 3;
-            // 
-            // tbStyle
-            // 
-            this.tbStyle.Location = new System.Drawing.Point(143, 146);
-            this.tbStyle.Name = "tbStyle";
-            this.tbStyle.Size = new System.Drawing.Size(180, 20);
-            this.tbStyle.TabIndex = 2;
             // 
             // tbAlbumArtist
             // 
@@ -288,7 +319,7 @@
             // gbShortAlbumList
             // 
             this.gbShortAlbumList.Controls.Add(this.dgvShortAlbumList);
-            this.gbShortAlbumList.Location = new System.Drawing.Point(362, 28);
+            this.gbShortAlbumList.Location = new System.Drawing.Point(513, 27);
             this.gbShortAlbumList.Name = "gbShortAlbumList";
             this.gbShortAlbumList.Size = new System.Drawing.Size(426, 410);
             this.gbShortAlbumList.TabIndex = 2;
@@ -306,9 +337,14 @@
             this.dgvShortAlbumList.Size = new System.Drawing.Size(413, 384);
             this.dgvShortAlbumList.TabIndex = 0;
             this.dgvShortAlbumList.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvShortAlbumList_RowHeaderMouseClick);
+            this.dgvShortAlbumList.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvShortAlbumList_RowHeaderMouseDoubleClick);
             // 
             // gbEditAlbum
             // 
+            this.gbEditAlbum.Controls.Add(this.label17);
+            this.gbEditAlbum.Controls.Add(this.tbEditCost);
+            this.gbEditAlbum.Controls.Add(this.tbEditFormat);
+            this.gbEditAlbum.Controls.Add(this.tbEditStyle);
             this.gbEditAlbum.Controls.Add(this.btnDeleteAlbum);
             this.gbEditAlbum.Controls.Add(this.label8);
             this.gbEditAlbum.Controls.Add(this.label9);
@@ -320,18 +356,70 @@
             this.gbEditAlbum.Controls.Add(this.btnEditAlbum);
             this.gbEditAlbum.Controls.Add(this.tbEditCountry);
             this.gbEditAlbum.Controls.Add(this.tbEditYear);
-            this.gbEditAlbum.Controls.Add(this.tbEditFormat);
             this.gbEditAlbum.Controls.Add(this.tbEditLabel);
-            this.gbEditAlbum.Controls.Add(this.tbEditStyle);
             this.gbEditAlbum.Controls.Add(this.tbEditArtist);
             this.gbEditAlbum.Controls.Add(this.tbEditName);
             this.gbEditAlbum.Location = new System.Drawing.Point(12, 29);
             this.gbEditAlbum.Name = "gbEditAlbum";
-            this.gbEditAlbum.Size = new System.Drawing.Size(342, 389);
+            this.gbEditAlbum.Size = new System.Drawing.Size(495, 389);
             this.gbEditAlbum.TabIndex = 3;
             this.gbEditAlbum.TabStop = false;
             this.gbEditAlbum.Text = "Edytuj Album";
             this.gbEditAlbum.Visible = false;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(20, 283);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(32, 13);
+            this.label17.TabIndex = 19;
+            this.label17.Text = "Cena";
+            // 
+            // tbEditCost
+            // 
+            this.tbEditCost.Enabled = false;
+            this.tbEditCost.Location = new System.Drawing.Point(144, 279);
+            this.tbEditCost.Name = "tbEditCost";
+            this.tbEditCost.Size = new System.Drawing.Size(179, 20);
+            this.tbEditCost.TabIndex = 7;
+            // 
+            // tbEditFormat
+            // 
+            this.tbEditFormat.FormattingEnabled = true;
+            this.tbEditFormat.Items.AddRange(new object[] {
+            "Winyl",
+            "Kaseta",
+            "CD",
+            "DVD",
+            "CDV",
+            "VHS",
+            "Cyfrowy"});
+            this.tbEditFormat.Location = new System.Drawing.Point(144, 198);
+            this.tbEditFormat.Name = "tbEditFormat";
+            this.tbEditFormat.Size = new System.Drawing.Size(180, 21);
+            this.tbEditFormat.TabIndex = 4;
+            // 
+            // tbEditStyle
+            // 
+            this.tbEditStyle.FormattingEnabled = true;
+            this.tbEditStyle.Items.AddRange(new object[] {
+            "Rock",
+            "Electronic",
+            "Pop",
+            "Folk, World & Country",
+            "Jazz",
+            "Funk / Soul",
+            "Classical",
+            "Hip Hop",
+            "Latin",
+            "Reggae",
+            "Stage & Screen",
+            "Blues"});
+            this.tbEditStyle.Location = new System.Drawing.Point(143, 146);
+            this.tbEditStyle.Name = "tbEditStyle";
+            this.tbEditStyle.Size = new System.Drawing.Size(180, 21);
+            this.tbEditStyle.TabIndex = 2;
             // 
             // btnDeleteAlbum
             // 
@@ -413,7 +501,7 @@
             this.btnEditAlbum.Location = new System.Drawing.Point(143, 332);
             this.btnEditAlbum.Name = "btnEditAlbum";
             this.btnEditAlbum.Size = new System.Drawing.Size(180, 23);
-            this.btnEditAlbum.TabIndex = 7;
+            this.btnEditAlbum.TabIndex = 8;
             this.btnEditAlbum.Text = "Edytuj";
             this.btnEditAlbum.UseVisualStyleBackColor = true;
             this.btnEditAlbum.Click += new System.EventHandler(this.btnEditAlbum_Click);
@@ -434,14 +522,6 @@
             this.tbEditYear.Size = new System.Drawing.Size(180, 20);
             this.tbEditYear.TabIndex = 5;
             // 
-            // tbEditFormat
-            // 
-            this.tbEditFormat.Enabled = false;
-            this.tbEditFormat.Location = new System.Drawing.Point(143, 200);
-            this.tbEditFormat.Name = "tbEditFormat";
-            this.tbEditFormat.Size = new System.Drawing.Size(180, 20);
-            this.tbEditFormat.TabIndex = 4;
-            // 
             // tbEditLabel
             // 
             this.tbEditLabel.Enabled = false;
@@ -449,14 +529,6 @@
             this.tbEditLabel.Name = "tbEditLabel";
             this.tbEditLabel.Size = new System.Drawing.Size(180, 20);
             this.tbEditLabel.TabIndex = 3;
-            // 
-            // tbEditStyle
-            // 
-            this.tbEditStyle.Enabled = false;
-            this.tbEditStyle.Location = new System.Drawing.Point(143, 146);
-            this.tbEditStyle.Name = "tbEditStyle";
-            this.tbEditStyle.Size = new System.Drawing.Size(180, 20);
-            this.tbEditStyle.TabIndex = 2;
             // 
             // tbEditArtist
             // 
@@ -479,7 +551,7 @@
             this.gbAlbumList.Controls.Add(this.dgvAlbumList);
             this.gbAlbumList.Location = new System.Drawing.Point(12, 29);
             this.gbAlbumList.Name = "gbAlbumList";
-            this.gbAlbumList.Size = new System.Drawing.Size(776, 356);
+            this.gbAlbumList.Size = new System.Drawing.Size(927, 356);
             this.gbAlbumList.TabIndex = 4;
             this.gbAlbumList.TabStop = false;
             this.gbAlbumList.Text = "Lista albumów";
@@ -490,7 +562,7 @@
             this.dgvAlbumList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvAlbumList.Location = new System.Drawing.Point(8, 19);
             this.dgvAlbumList.Name = "dgvAlbumList";
-            this.dgvAlbumList.Size = new System.Drawing.Size(762, 331);
+            this.dgvAlbumList.Size = new System.Drawing.Size(913, 331);
             this.dgvAlbumList.TabIndex = 0;
             // 
             // gbFiltres
@@ -502,11 +574,21 @@
             this.gbFiltres.Controls.Add(this.tbSearch);
             this.gbFiltres.Location = new System.Drawing.Point(13, 385);
             this.gbFiltres.Name = "gbFiltres";
-            this.gbFiltres.Size = new System.Drawing.Size(775, 53);
+            this.gbFiltres.Size = new System.Drawing.Size(926, 53);
             this.gbFiltres.TabIndex = 5;
             this.gbFiltres.TabStop = false;
             this.gbFiltres.Text = "Filtry";
             this.gbFiltres.Visible = false;
+            // 
+            // btnShowAll
+            // 
+            this.btnShowAll.Location = new System.Drawing.Point(602, 17);
+            this.btnShowAll.Name = "btnShowAll";
+            this.btnShowAll.Size = new System.Drawing.Size(132, 23);
+            this.btnShowAll.TabIndex = 4;
+            this.btnShowAll.Text = "Pokaż wszystkie";
+            this.btnShowAll.UseVisualStyleBackColor = true;
+            this.btnShowAll.Click += new System.EventHandler(this.btnShowAll_Click);
             // 
             // cbSearch
             // 
@@ -550,27 +632,94 @@
             this.tbSearch.Size = new System.Drawing.Size(135, 20);
             this.tbSearch.TabIndex = 0;
             // 
-            // btnShowAll
+            // gbCosts
             // 
-            this.btnShowAll.Location = new System.Drawing.Point(602, 17);
-            this.btnShowAll.Name = "btnShowAll";
-            this.btnShowAll.Size = new System.Drawing.Size(132, 23);
-            this.btnShowAll.TabIndex = 4;
-            this.btnShowAll.Text = "Pokaż wszystkie";
-            this.btnShowAll.UseVisualStyleBackColor = true;
-            this.btnShowAll.Click += new System.EventHandler(this.btnShowAll_Click);
+            this.gbCosts.Controls.Add(this.btnShowAllCost);
+            this.gbCosts.Controls.Add(this.lblCostResult);
+            this.gbCosts.Controls.Add(this.label18);
+            this.gbCosts.Controls.Add(this.btnCountMiddleCost);
+            this.gbCosts.Controls.Add(this.cbCostSearch);
+            this.gbCosts.Controls.Add(this.tbCostSearch);
+            this.gbCosts.Location = new System.Drawing.Point(12, 389);
+            this.gbCosts.Name = "gbCosts";
+            this.gbCosts.Size = new System.Drawing.Size(891, 58);
+            this.gbCosts.TabIndex = 6;
+            this.gbCosts.TabStop = false;
+            this.gbCosts.Text = "Ceny";
+            this.gbCosts.Visible = false;
+            // 
+            // lblCostResult
+            // 
+            this.lblCostResult.AutoSize = true;
+            this.lblCostResult.Location = new System.Drawing.Point(502, 28);
+            this.lblCostResult.Name = "lblCostResult";
+            this.lblCostResult.Size = new System.Drawing.Size(0, 13);
+            this.lblCostResult.TabIndex = 4;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(427, 28);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(68, 13);
+            this.label18.TabIndex = 3;
+            this.label18.Text = "Średni koszt:";
+            // 
+            // btnCountMiddleCost
+            // 
+            this.btnCountMiddleCost.Location = new System.Drawing.Point(277, 25);
+            this.btnCountMiddleCost.Name = "btnCountMiddleCost";
+            this.btnCountMiddleCost.Size = new System.Drawing.Size(134, 23);
+            this.btnCountMiddleCost.TabIndex = 2;
+            this.btnCountMiddleCost.Text = "Oblicz średnią cenę";
+            this.btnCountMiddleCost.UseVisualStyleBackColor = true;
+            this.btnCountMiddleCost.Click += new System.EventHandler(this.btnCountMiddleCost_Click);
+            // 
+            // cbCostSearch
+            // 
+            this.cbCostSearch.FormattingEnabled = true;
+            this.cbCostSearch.Items.AddRange(new object[] {
+            "Nazwa",
+            "Artysta",
+            "Styl",
+            "Wydawnictwo",
+            "Format",
+            "Rok",
+            "Kraj"});
+            this.cbCostSearch.Location = new System.Drawing.Point(137, 25);
+            this.cbCostSearch.Name = "cbCostSearch";
+            this.cbCostSearch.Size = new System.Drawing.Size(121, 21);
+            this.cbCostSearch.TabIndex = 1;
+            // 
+            // tbCostSearch
+            // 
+            this.tbCostSearch.Location = new System.Drawing.Point(18, 25);
+            this.tbCostSearch.Name = "tbCostSearch";
+            this.tbCostSearch.Size = new System.Drawing.Size(100, 20);
+            this.tbCostSearch.TabIndex = 0;
+            // 
+            // btnShowAllCost
+            // 
+            this.btnShowAllCost.Location = new System.Drawing.Point(692, 24);
+            this.btnShowAllCost.Name = "btnShowAllCost";
+            this.btnShowAllCost.Size = new System.Drawing.Size(159, 23);
+            this.btnShowAllCost.TabIndex = 5;
+            this.btnShowAllCost.Text = "Pokaż wszystkie";
+            this.btnShowAllCost.UseVisualStyleBackColor = true;
+            this.btnShowAllCost.Click += new System.EventHandler(this.btnShowAll_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(951, 450);
+            this.Controls.Add(this.gbCosts);
+            this.Controls.Add(this.msMenu);
             this.Controls.Add(this.gbFiltres);
+            this.Controls.Add(this.gbAddAlbum);
             this.Controls.Add(this.gbAlbumList);
             this.Controls.Add(this.gbEditAlbum);
             this.Controls.Add(this.gbShortAlbumList);
-            this.Controls.Add(this.gbAddAlbum);
-            this.Controls.Add(this.msMenu);
             this.MainMenuStrip = this.msMenu;
             this.Name = "Form1";
             this.Text = "Katalog Muzyczny";
@@ -587,6 +736,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvAlbumList)).EndInit();
             this.gbFiltres.ResumeLayout(false);
             this.gbFiltres.PerformLayout();
+            this.gbCosts.ResumeLayout(false);
+            this.gbCosts.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -595,10 +746,8 @@
         #endregion
 
         private System.Windows.Forms.MenuStrip msMenu;
-        private System.Windows.Forms.ToolStripMenuItem msiEdit;
-        private System.Windows.Forms.ToolStripMenuItem msiAddAlbum;
+        private System.Windows.Forms.ToolStripMenuItem msiAdd;
         private System.Windows.Forms.GroupBox gbAddAlbum;
-        private System.Windows.Forms.TextBox tbStyle;
         private System.Windows.Forms.TextBox tbAlbumArtist;
         private System.Windows.Forms.TextBox tbAlbumName;
         private System.Windows.Forms.Label label7;
@@ -611,12 +760,9 @@
         private System.Windows.Forms.Button btnAddAlbum;
         private System.Windows.Forms.TextBox tbCountry;
         private System.Windows.Forms.TextBox tbYear;
-        private System.Windows.Forms.TextBox tbFormat;
         private System.Windows.Forms.TextBox tbLabel;
         private System.Windows.Forms.GroupBox gbShortAlbumList;
-        private System.Windows.Forms.Button btnRead;
         private System.Windows.Forms.DataGridView dgvShortAlbumList;
-        private System.Windows.Forms.ToolStripMenuItem msiEditAlbum;
         private System.Windows.Forms.GroupBox gbEditAlbum;
         private System.Windows.Forms.Button btnDeleteAlbum;
         private System.Windows.Forms.Label label8;
@@ -629,9 +775,7 @@
         private System.Windows.Forms.Button btnEditAlbum;
         private System.Windows.Forms.TextBox tbEditCountry;
         private System.Windows.Forms.TextBox tbEditYear;
-        private System.Windows.Forms.TextBox tbEditFormat;
         private System.Windows.Forms.TextBox tbEditLabel;
-        private System.Windows.Forms.TextBox tbEditStyle;
         private System.Windows.Forms.TextBox tbEditArtist;
         private System.Windows.Forms.TextBox tbEditName;
         private System.Windows.Forms.ToolStripMenuItem msiView;
@@ -643,6 +787,22 @@
         private System.Windows.Forms.TextBox tbSearch;
         private System.Windows.Forms.ComboBox cbSearch;
         private System.Windows.Forms.Button btnShowAll;
+        private System.Windows.Forms.ComboBox tbStyle;
+        private System.Windows.Forms.ComboBox tbFormat;
+        private System.Windows.Forms.ComboBox tbEditFormat;
+        private System.Windows.Forms.ComboBox tbEditStyle;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.TextBox tbCost;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.TextBox tbEditCost;
+        private System.Windows.Forms.GroupBox gbCosts;
+        private System.Windows.Forms.ToolStripMenuItem msiCosts;
+        private System.Windows.Forms.ComboBox cbCostSearch;
+        private System.Windows.Forms.TextBox tbCostSearch;
+        private System.Windows.Forms.Button btnCountMiddleCost;
+        private System.Windows.Forms.Label lblCostResult;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Button btnShowAllCost;
     }
 }
 

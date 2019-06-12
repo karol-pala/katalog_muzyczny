@@ -108,6 +108,7 @@ namespace Katalog_Muzyczny
                         album.Format = s[4];
                         album.Year = Int32.Parse(s[5]);
                         album.Country = s[6];
+                        album.Cost = float.Parse(s[7]);
                     }
                     count++;
                 }
@@ -126,7 +127,7 @@ namespace Katalog_Muzyczny
             {
                 fs = new FileStream(dataPath, FileMode.Append);
                 sw = new StreamWriter(fs);
-                sw.WriteLine($"{album.Name};{album.Artist};{album.Style};{album.Label};{album.Format};{album.Year};{album.Country}");
+                sw.WriteLine($"{album.Name};{album.Artist};{album.Style};{album.Label};{album.Format};{album.Year};{album.Country};{album.Cost}");
                 sw.Close();
                 fs.Close();
                 return true;
@@ -151,7 +152,7 @@ namespace Katalog_Muzyczny
                 {
                     if(count == id)
                     {
-                        temp2 += $"{album.Name};{album.Artist};{album.Style};{album.Label};{album.Format};{album.Year};{album.Country}\r\n";
+                        temp2 += $"{album.Name};{album.Artist};{album.Style};{album.Label};{album.Format};{album.Year};{album.Country};{album.Cost}\r\n";
                     } else
                     {
                         temp2 += temp + "\r\n";

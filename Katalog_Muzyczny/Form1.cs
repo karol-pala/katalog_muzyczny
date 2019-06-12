@@ -23,71 +23,26 @@ namespace Katalog_Muzyczny
         }
 
         //interfejs
-        private void msiAddAlbum_Click(object sender, EventArgs e)
+        //dodawanie albumów
+        private void msiAdd_Click(object sender, EventArgs e)
         {
             gbAlbumList.Visible = false;
             gbFiltres.Visible = false;
             gbEditAlbum.Visible = false;
             gbAddAlbum.Visible = true;
             gbShortAlbumList.Visible = true;
+            gbCosts.Visible = false;
         }
 
-        private void msiEditAlbum_Click(object sender, EventArgs e)
+        //włączanie edycji
+        private void dgvShortAlbumList_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             gbAddAlbum.Visible = false;
             gbFiltres.Visible = false;
             gbAlbumList.Visible = false;
             gbEditAlbum.Visible = true;
             gbShortAlbumList.Visible = true;
-        }
-
-        private void btnAddAlbum_Click(object sender, EventArgs e)
-        {
-            Album album = new Album();
-            if(tbAlbumName.Text != "")
-            {
-                if (tbAlbumArtist.Text != "")
-                {
-                    try
-                    {
-                        album.Name = tbAlbumName.Text;
-                        album.Artist = tbAlbumArtist.Text;
-                        album.Style = tbStyle.Text;
-                        album.Label = tbLabel.Text;
-                        album.Format = tbFormat.Text;
-                        album.Year = Int32.Parse(tbYear.Text);
-                        album.Country = tbCountry.Text;
-                    } catch(Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-                    
-
-                    DB.InsertEntry(album);
-                    
-                    tbAlbumName.Text = null;
-                    tbAlbumArtist.Text = null;
-                    tbStyle.Text = null;
-                    tbLabel.Text = null;
-                    tbFormat.Text = null;
-                    tbYear.Text = null;
-                    tbCountry.Text = null;
-                    
-                } else
-                {
-                    MessageBox.Show("Podaj artystę");
-                }
-            }
-            else
-            {
-                MessageBox.Show("Podaj nazwę albumu");
-            }
-            FillShortAlbumList();
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            FillShortAlbumList();
+            gbCosts.Visible = false;
         }
 
         private void msiView_Click(object sender, EventArgs e)
@@ -95,13 +50,98 @@ namespace Katalog_Muzyczny
             gbAddAlbum.Visible = false;
             gbEditAlbum.Visible = false;
             gbShortAlbumList.Visible = false;
+            gbCosts.Visible = false;
             gbAlbumList.Visible = true;
             gbFiltres.Visible = true;
             FillAlbumList();
         }
 
-        //obsługa krótszej listy albumów
+        private void msiCosts_Click(object sender, EventArgs e)
+        {
+            gbAddAlbum.Visible = false;
+            gbEditAlbum.Visible = false;
+            gbAlbumList.Visible = true;
+            gbFiltres.Visible = false;
+            gbCosts.Visible = true;
+            gbShortAlbumList.Visible = false;
+            FillAlbumList();
+        }
 
+        //dodawanie albumu do bazy danych
+        private void btnAddAlbum_Click(object sender, EventArgs e)
+        {
+            Album album = new Album();
+            if(TestAddForm()) {
+                try
+                {
+                    album.Name = tbAlbumName.Text;
+                    album.Artist = tbAlbumArtist.Text;
+                    album.Style = tbStyle.Text;
+                    album.Label = tbLabel.Text;
+                    album.Format = tbFormat.Text;
+                    album.Year = Int32.Parse(tbYear.Text);
+                    album.Country = tbCountry.Text;
+                    album.Cost = float.Parse(tbCost.Text);
+                    MessageBox.Show(album.Cost.ToString());
+                    DB.InsertEntry(album);
+                } catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    tbCost.Text = null;
+                    tbYear.Text = null;
+                    return;
+                }
+                ClearAddForm();
+            }
+            else
+            {
+                MessageBox.Show("Wypełnij pola");
+            }
+            FillShortAlbumList();
+        }
+
+        private bool TestAddForm()
+        {
+            bool name = (tbAlbumName.Text != "");
+            bool artist = (tbAlbumArtist.Text != "");
+            bool style = (tbStyle.Text != "");
+            bool label = (tbLabel.Text != "");
+            bool format = (tbFormat.Text != "");
+            bool year = (tbYear.Text != "");
+            bool country = (tbCountry.Text != "");
+            bool cost = (tbCost.Text != "");
+
+            if ((name && artist && style && label && format && year && country && cost) == true)
+            {
+                return true;
+            } else
+            {
+                return false;
+            }
+        }
+
+        //czyszczenie formularza do dodawania albumu
+        private void ClearAddForm()
+        {
+            tbAlbumName.Text = null;
+            tbAlbumArtist.Text = null;
+            tbStyle.Text = null;
+            tbLabel.Text = null;
+            tbFormat.Text = null;
+            tbYear.Text = null;
+            tbCountry.Text = null;
+            tbCost.Text = null; 
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            FillShortAlbumList();
+        }
+
+        
+
+        //obsługa krótszej listy albumów
+        //wypełnianie listy albumami
         private void FillShortAlbumList()
         {
             List<ShortAlbum> albums = new List<ShortAlbum>();
@@ -119,6 +159,10 @@ namespace Katalog_Muzyczny
             dgvShortAlbumList.DataSource = albums;
         }
 
+
+
+        //wypełnianie formularza danymi z bazy danych
+        //odblokowanie 
         private void dgvShortAlbumList_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             activeRowIndex = e.RowIndex;
@@ -132,6 +176,8 @@ namespace Katalog_Muzyczny
                 btnDeleteAlbum.Enabled = true;
             }
         }
+
+        
 
         //obsługa dłuższej listy albumów
 
@@ -166,6 +212,7 @@ namespace Katalog_Muzyczny
             tbEditFormat.Enabled = flag;
             tbEditYear.Enabled = flag;
             tbEditCountry.Enabled = flag;
+            tbEditCost.Enabled = flag;
         }
 
         private void FillEditForm(Album album)
@@ -177,26 +224,32 @@ namespace Katalog_Muzyczny
             tbEditFormat.Text = album.Format;
             tbEditYear.Text = album.Year.ToString();
             tbEditCountry.Text = album.Country;
+            tbEditCost.Text = album.Cost.ToString();
         }
 
         private void ClearEditForm()
         {
-            tbEditName.Text = "";
-            tbEditArtist.Text = "";
-            tbEditStyle.Text = "";
-            tbEditLabel.Text = "";
-            tbEditFormat.Text = "";
-            tbEditYear.Text = "";
-            tbEditCountry.Text = "";
+            tbEditName.Text = null;
+            tbEditArtist.Text = null;
+            tbEditStyle.Text = null;
+            tbEditLabel.Text = null;
+            tbEditFormat.Text = null;
+            tbEditYear.Text = null;
+            tbEditCountry.Text = null;
+            tbEditCost.Text = null;
         }
         
         private bool TestEditForm()
         {
             bool name = (tbEditName.Text != "");
             bool artist = (tbEditArtist.Text != "");
-            
+            bool style = (tbEditStyle.Text != "");
+            bool label = (tbEditLabel.Text != "");
+            bool format = (tbEditFormat.Text != "");
+            bool year = (tbEditYear.Text != "");
+            bool country = (tbEditCountry.Text != "");
 
-            if((name && artist) == true)
+            if((name && artist && style && label && format && year && country) == true)
             {
                 return true;
             }
@@ -218,9 +271,12 @@ namespace Katalog_Muzyczny
                 album.Format = tbEditFormat.Text;
                 album.Year = Int32.Parse(tbEditYear.Text);
                 album.Country = tbEditCountry.Text;
+                album.Cost = float.Parse(tbEditCost.Text);
             } catch(Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Pole rok musi być liczbą");
+                tbEditYear.Text = null;
+                return;
             }
             
 
@@ -242,28 +298,39 @@ namespace Katalog_Muzyczny
             btnDeleteAlbum.Enabled = false;
         }
 
-        //testy
-
-        private void btnRead_Click(object sender, EventArgs e)
-        {
-            Album a = new Album();
-            DB.ReadEntry(1, ref a);
-            MessageBox.Show($"{a.Name};{a.Artist};{a.Style}");
-            FillShortAlbumList();
-        }
-
         //Wyszukiwanie
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            if(tbSearch.Text != "")
+            dgvAlbumList.DataSource = SearchAlbums(tbSearch, cbSearch);
+        }
+
+        private void btnShowAll_Click(object sender, EventArgs e)
+        {
+            FillAlbumList();
+        }
+
+
+        //średni koszt
+        private void btnCountMiddleCost_Click(object sender, EventArgs e)
+        {
+            List<Album> albums = SearchAlbums(tbCostSearch, cbCostSearch);
+            dgvAlbumList.DataSource = albums;
+            Cost cost = new Cost(albums);
+            float result = cost.MiddleCost();
+            lblCostResult.Text = result.ToString();
+        }
+
+        private List<Album> SearchAlbums(TextBox textBox, ComboBox comboBox)
+        {
+            List<Album> albums = new List<Album>();
+            if (textBox.Text != "")
             {
-                string key = tbSearch.Text;
-                string id = "";
-                List<Album> albums = new List<Album>();
-                if(cbSearch.Text != "")
+                if(comboBox.Text != "")
                 {
-                    switch (cbSearch.Text)
+                    string key = textBox.Text;
+                    string id = "";
+                    switch (comboBox.Text)
                     {
                         case "Nazwa":
                             id = DB.Select(key, 0);
@@ -288,7 +355,7 @@ namespace Katalog_Muzyczny
                             break;
                     }
                     string[] ids = id.Split(';');
-                    if(ids.Length > 1)
+                    if (ids.Length > 1)
                     {
                         for (int j = 0; j < ids.Length; j++)
                         {
@@ -303,27 +370,21 @@ namespace Katalog_Muzyczny
                             }
 
                         }
-                        dgvAlbumList.DataSource = albums;
-                    } else
+                    }
+                    else
                     {
                         MessageBox.Show("Podana fraza nie istnieje w katalogu");
                     }
-                    
+
                 } else
                 {
-                    MessageBox.Show("Wybierz kolumnę do przeszukiwania");
+                    MessageBox.Show("Wybierz kolumnę do przeszukania");
                 }
-                
-                
             } else
             {
                 MessageBox.Show("Wpisz szukaną frazę");
             }
-        }
-
-        private void btnShowAll_Click(object sender, EventArgs e)
-        {
-            FillAlbumList();
+            return albums;
         }
     }
 }
